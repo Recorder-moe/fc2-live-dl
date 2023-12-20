@@ -42,10 +42,9 @@ jobs:
         id: setup
         uses: ./.github/workflows/docker-reused-setup-steps
         with:
+          DOCKERHUB_ORGANIZATION_NAME : ${{ secrets.DOCKERHUB_ORGANIZATION_NAME }}
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-          QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
-          QUAY_TOKEN: ${{ secrets.QUAY_TOKEN }}
           tag: alpine
 
       - name: Build and push
@@ -77,13 +76,7 @@ jobs:
       - name: Attest Docker Hub image
         uses: actions/attest-build-provenance@v2
         with:
-          subject-name: index.docker.io/${{ secrets.DOCKERHUB_USERNAME }}/fc2-live-dl
-          subject-digest: ${{ steps.build_push_alpine.outputs.digest }}
-
-      - name: Attest Quay image
-        uses: actions/attest-build-provenance@v2
-        with:
-          subject-name: quay.io/${{ github.repository_owner }}/fc2-live-dl
+          subject-name: index.docker.io/${{ secrets.DOCKERHUB_ORGANIZATION_NAME }}/fc2-live-dl
           subject-digest: ${{ steps.build_push_alpine.outputs.digest }}
 
   docker-ubi:
@@ -109,10 +102,9 @@ jobs:
         id: setup
         uses: ./.github/workflows/docker-reused-setup-steps
         with:
+          DOCKERHUB_ORGANIZATION_NAME : ${{ secrets.DOCKERHUB_ORGANIZATION_NAME }}
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-          QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
-          QUAY_TOKEN: ${{ secrets.QUAY_TOKEN }}
           tag: ubi
 
       - name: Build and push
@@ -144,13 +136,7 @@ jobs:
       - name: Attest Docker Hub image
         uses: actions/attest-build-provenance@v2
         with:
-          subject-name: index.docker.io/${{ secrets.DOCKERHUB_USERNAME }}/fc2-live-dl
-          subject-digest: ${{ steps.build_push_ubi.outputs.digest }}
-
-      - name: Attest Quay image
-        uses: actions/attest-build-provenance@v2
-        with:
-          subject-name: quay.io/${{ github.repository_owner }}/fc2-live-dl
+          subject-name: index.docker.io/${{ secrets.DOCKERHUB_ORGANIZATION_NAME }}/fc2-live-dl
           subject-digest: ${{ steps.build_push_ubi.outputs.digest }}
 
   docker-distroless:
@@ -176,10 +162,9 @@ jobs:
         id: setup
         uses: ./.github/workflows/docker-reused-setup-steps
         with:
+          DOCKERHUB_ORGANIZATION_NAME : ${{ secrets.DOCKERHUB_ORGANIZATION_NAME }}
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-          QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
-          QUAY_TOKEN: ${{ secrets.QUAY_TOKEN }}
           tag: distroless
 
       - name: Build and push
@@ -211,11 +196,6 @@ jobs:
       - name: Attest Docker Hub image
         uses: actions/attest-build-provenance@v2
         with:
-          subject-name: index.docker.io/${{ secrets.DOCKERHUB_USERNAME }}/fc2-live-dl
+          subject-name: index.docker.io/${{ secrets.DOCKERHUB_ORGANIZATION_NAME }}/fc2-live-dl
           subject-digest: ${{ steps.build_push_distroless.outputs.digest }}
 
-      - name: Attest Quay image
-        uses: actions/attest-build-provenance@v2
-        with:
-          subject-name: quay.io/${{ github.repository_owner }}/fc2-live-dl
-          subject-digest: ${{ steps.build_push_distroless.outputs.digest }}
