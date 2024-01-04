@@ -74,8 +74,8 @@ COPY --link --chown=$UID:0 --chmod=775 --from=build /root/.local /home/$UID/.loc
 ENV PATH="/home/$UID/.local/bin:$PATH"
 ENV PYTHONPATH="/home/$UID/.local/lib/python3.12/site-packages:${PYTHONPATH}"
 
-# Remove these to prevent the container from executing arbitrary commands
-RUN rm /bin/echo /bin/ln /bin/rm /bin/sh
+# # Remove these to prevent the container from executing arbitrary commands
+# RUN rm /bin/echo /bin/ln /bin/rm /bin/sh
 
 WORKDIR /recordings
 
