@@ -58,9 +58,6 @@ jobs:
             VERSION=${{ github.head_ref || github.ref_name }}
             RELEASE=${{ github.run_number }}
           platforms: linux/amd64,linux/arm64
-          # Cache to regietry instead of gha to avoid the capacity limit.
-          cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/fc2-live-dl:cache
-          cache-to: type=registry,ref=ghcr.io/${{ github.repository_owner }}/fc2-live-dl:cache,mode=max
           sbom: true
           provenance: true
 
@@ -105,9 +102,6 @@ jobs:
             VERSION=${{ github.head_ref || github.ref_name }}
             RELEASE=${{ github.run_number }}
           platforms: linux/amd64,linux/arm64
-          # Cache to regietry instead of gha to avoid the capacity limit.
-          cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/fc2-live-dl:cache
-          cache-to: type=registry,ref=ghcr.io/${{ github.repository_owner }}/fc2-live-dl:cache,mode=max
           sbom: true
           provenance: true
 
@@ -152,8 +146,5 @@ jobs:
             VERSION=${{ github.head_ref || github.ref_name }}
             RELEASE=${{ github.run_number }}
           platforms: linux/amd64,linux/arm64
-          # Cache to regietry instead of gha to avoid the capacity limit.
-          cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/fc2-live-dl:cache
-          cache-to: type=registry,ref=ghcr.io/${{ github.repository_owner }}/fc2-live-dl:cache,mode=max
           sbom: true
           provenance: true
